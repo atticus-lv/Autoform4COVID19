@@ -2,6 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
 
 from time import sleep
 
@@ -15,11 +16,10 @@ def main():
         web = autoform(username,password,driver)
         if web.login():
             web.switch()
-            try:
-                web.autoform()
+            empty = web.autoform()
+
+            if empty:
                 web.upload()
-            except:
-                print("已经填写完成？或是中途移动了鼠标导致错误？")
     else:
         print('\n程序将在10秒后关闭')
         sleep(10)
@@ -27,7 +27,15 @@ def main():
 
 def getdriver():
     try:
-        driver = webdriver.Chrome('chromedriver.exe')
+
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('log-level=3')
+        print("驱动正常")
+        print("静默运行模式...")
+        driver = webdriver.Chrome('chromedriver.exe',options=chrome_options)
+
         return driver
     except:
         print("目录文件夹下缺少驱动程序，无法使用"
@@ -40,7 +48,7 @@ class UserInfo(object):
 
     @staticmethod
     def read():
-        print("检测到账号密码文件...")
+        print("检测账号密码文件中...")
         f = open("账户密码.txt", "r")  # 打开文件 w为写入，没有则创建
         lines = f.readlines()  # readline 为一行 readlines为全部行，单独read为单个字符位
         username = lines[0]
@@ -82,7 +90,7 @@ class autoform(object):
         self.driver = driver
 
     def login(self):
-        print("驱动正常，开始寻找网页")
+        print("开始寻找网页")
         self.driver.get(
             "http://xgfx.bnuz.edu.cn/xsdtfw/sys/emapfunauth/pages/funauth-login.do?service=%2Fxsdtfw%2Fsys%2Femaphome%2Fportal%2Findex.do#/")
         self.driver.implicitly_wait(10)
@@ -96,7 +104,7 @@ class autoform(object):
 
 
     def switch(self):
-        print("网页跳转中")
+        print("网页跳转中，请勿移动鼠标")
         self.driver.switch_to.window(self.driver.window_handles[0])
         self.driver.find_element_by_xpath('//li[@title="疫情自查上报"]').click()
         self.driver.implicitly_wait(10)
@@ -104,27 +112,37 @@ class autoform(object):
 
 
     def autoform(self):
-        print("自动填写开始，请勿移动鼠标")
-        TW = self.driver.find_element_by_xpath("//input[@name='TW']")
-        TW.send_keys('37')
-        print("体温填写完毕")
-        #下拉选项
-        var1 = 6
-        var2 = 24
-        action = ActionChains(self.driver)
-        for i in range(0, 5):
-            elements = [
-                f"/html/body/main/article/section/div[2]/div[2]/div/div[2]/div[2]/div[{var1}]/div/div/div[2]/div/div/div[1]",
-                f"/html/body/div[{var2}]/div/div/div/div[2]/div/div[3]"
-            ]
-            c = self.driver.find_element_by_xpath(elements[0]).click()
-            action.click(on_element=c)
-            c1 = self.driver.find_element_by_xpath(elements[1]).click()
-            var1 += 2
-            var2 += 2
-            sleep(0.5)
-        print("下来选项填写完成\n")
+        print("自动填写开始,移动鼠标可能导致填写失败")
+        try:
+            TW = self.driver.find_element_by_xpath("//input[@name='TW']")
+            TW.send_keys('36.7')
+            print("体温填写完毕")
+        except:
+            print("您已填写完毕,无需再次填写")
+            return None
 
+        try:
+            #下拉选项
+            var1 = 6
+            var2 = 24
+            action = ActionChains(self.driver)
+            for i in range(0, 5):
+                elements = [
+                    f"/html/body/main/article/section/div[2]/div[2]/div/div[2]/div[2]/div[{var1}]/div/div/div[2]/div/div/div[1]",
+                    f"/html/body/div[{var2}]/div/div/div/div[2]/div/div[3]"
+                ]
+                c = self.driver.find_element_by_xpath(elements[0]).click()
+                action.click(on_element=c)
+                c1 = self.driver.find_element_by_xpath(elements[1]).click()
+                var1 += 2
+                var2 += 2
+                sleep(0.1)
+            print("下来选项填写完成\n")
+        except:
+            print("中途移动鼠标导致错误，请重新启动本程序")
+            return None
+
+        return True
 
     def upload(self):
         print("正在上传\n")
@@ -137,16 +155,8 @@ class autoform(object):
 
         except Exception as ein:
             print(f"出现错误：{ein}"
-                  "\n你已填写完成？或是不小心移动了鼠标导致错误？")
+                  "\n移动了鼠标导致错误")
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
