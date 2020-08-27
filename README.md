@@ -10,9 +10,6 @@
 
 若提示找不到驱动，确保你使用的是最新的谷歌浏览器(84版本)
 
-或者想使用其他浏览器的，请按提示下载[对应驱动](http://chromedriver.storage.googleapis.com/index.html)
+使用其他版本的，请按提示下载[对应驱动](http://chromedriver.storage.googleapis.com/index.html)
 
 然后替换`chromedriver.exe`，并重新启动 程序
-
-
-
