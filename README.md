@@ -46,4 +46,4 @@
 
 > 如果本项目对你有帮助，请我喝杯奶茶
 
-<img src="img/9f8055b3a6e3c03a6c0e7aa19d5c700.jpg" alt="9f8055b3a6e3c03a6c0e7aa19d5c700" style="zoom:33%;" />
+<img src="img/img.jpg" alt="img" style="zoom: 80%;" />
