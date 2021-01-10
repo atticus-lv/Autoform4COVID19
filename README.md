@@ -1,26 +1,32 @@
-### 自动上报
+### 自动填报 1.5版本
 
-**2021晨午体温填报**
-
-> 使用方法：
+> **使用方法**
 
 1. 点击本页面的 Code，下载ZIP 
 
-2. 解压并打开 **Morning_Noon.exe** 文件（请勿删除其他文件）
+2. 解压并打开 **`main.exe`** 文件（请勿删除`chromedriver.exe`文件）
 
->  注意事项
+> **连接学校WIFI时无法进入网站，会导致程序报错**
 
-**连接学校WIFI时无法进入网站，会导致程序报错**
+第一次使用需按照提示输入用户信息，随后会保存为`账号密码.txt`
 
-第一次使用需按照提示输入用户信息，
+其中，第三行为输入0为每日报平安，1为晨午间体温
+
+```
+18180xxxxx 
+password
+0 
+```
 
 若提示找不到驱动或出现奇怪的报错，确保你使用的是最新的谷歌浏览器(87版本)
 
-使用其他版本的，请按提示下载[对应驱动](http://chromedriver.storage.googleapis.com/index.html)
+使用其他版本的，请按提示下载对应驱动，[或点击这里](http://chromedriver.storage.googleapis.com/index.html)
 
-然后替换`chromedriver.exe`，并重新启动程序
+替换`chromedriver.exe`，并重新启动程序
 
-> Windows 用户定时任务
+
+
+#### Windows 用户定时任务
 
 搜索栏搜索
 
@@ -34,7 +40,7 @@
 
 ![image-20200908120648812](img/image-20200908120648812.png)
 
-选择 **自动填写.exe**
+选择 **main.exe**
 
 ![image-20200908121229475](img/image-20200908121229475.png)
 
