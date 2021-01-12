@@ -155,8 +155,8 @@ class 每日报平安(Autoform):
         logger.info("寻找网页...")
         self.driver.get(
             "http://xgfx.bnuz.edu.cn/xsdtfw/sys/emapfunauth/pages/funauth-login.do?service=%2Fxsdtfw%2Fsys%2Femaphome%2Fportal%2Findex.do#/")
-        self.driver.implicitly_wait(10)
-        logger.info("登录中...")
+        self.driver.implicitly_wait(5)
+        logger.info(f"{self.username}登录中...")
         self.driver.find_elements_by_xpath('//input[@class="ivu-input ivu-input-large ivu-input-with-prefix"]')[
             0].send_keys(
             self.username)
@@ -171,17 +171,18 @@ class 每日报平安(Autoform):
         logger.info("网页跳转中，请勿移动鼠标...")
         self.driver.switch_to.window(self.driver.window_handles[0])
         self.driver.find_element_by_xpath('//li[@title="疫情自查上报"]').click()
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(5)
         self.driver.switch_to.window(self.driver.window_handles[1])
 
     def fill(self):
-        logger.info("自动填写开始,移动鼠标可能导致填写失败...")
+        logger.info(f"{self.username}自动填写开始,移动鼠标可能导致填写失败...")
         try:
+            self.driver.implicitly_wait(2)
             tem = self.driver.find_element_by_xpath("//input[@name='TW']")
             tem.send_keys(TW)
-            logger.info("体温填写完毕...")
+            logger.info(f"{self.username}体温填写完毕...")
         except:
-            logger.info("您已填写完毕,无需再次填写...")
+            logger.info(f"{self.username}已填写完毕,无需再次填写...")
             self.driver.quit()
             return None
 
@@ -201,7 +202,7 @@ class 每日报平安(Autoform):
                 var1 += 2
                 var2 += 2
                 sleep(0.02)
-            logger.info("下拉选项填写完成\n")
+            logger.info(f"{self.username}下拉选项填写完成\n")
         except:
             logger.warning("中途移动鼠标导致错误，请重新启动本程序")
             self.driver.quit()
@@ -210,14 +211,14 @@ class 每日报平安(Autoform):
         return True
 
     def upload(self):
-        logger.info('正在上传')
+        logger.info(f'{self.username}正在上传')
         try:
             self.driver.find_element_by_xpath('//*[@id="save"]').click()
-            logger.info('上传完成')
+            logger.info(f'{self.username}上传完成')
             self.driver.quit()
 
         except Exception as ein:
-            logger.warning(f"出现错误：{ein}")
+            logger.warning(f"{self.username}出现错误：{ein}")
             self.driver.quit()
 
 
@@ -228,14 +229,14 @@ class 晨午间体温(Autoform):
             if self.fill():
                 self.upload()
             else:
-                print('本时段已经填写完成')
+                print(f'{self.username}本时段已经填写完成')
             self.finish()
 
     def login(self):
         print("开始寻找网页")
         self.driver.get("http://xgfx.bnuz.edu.cn/xsdtfw/sys/swmxsyqxxsjapp/*default/index.do?THEME=indigo&EMAP_LANG=zh")
         self.driver.implicitly_wait(10)
-        print("到达登录页面，开始填写用户数据")
+        print(f"{self.username}到达登录页面，开始填写数据")
         self.driver.find_element_by_xpath('//*[@id="page"]/div/div/div/div/button[2]').click()
         self.driver.find_elements_by_xpath('//input[@class="ivu-input ivu-input-large ivu-input-with-prefix"]')[
             0].send_keys(self.username)
@@ -256,14 +257,14 @@ class 晨午间体温(Autoform):
         return True
 
     def upload(self):
-        print("正在上传\n")
+        print(f"{self.username}正在上传\n")
         try:
             self.driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/div[2]/button').click()
-            print("上传完成\n")
+            print(f"{self.username}上传完成\n")
             self.driver.quit()
 
         except Exception as e:
-            print(f"出现错误：{e}")
+            print(f"{self.username}出现错误：{e}")
 
 
 if __name__ == '__main__':
