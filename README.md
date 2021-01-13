@@ -57,7 +57,7 @@ password
 1. 安装  https://www.python.org/downloads/
 2. 添加 python 到环境变量中（如果第一步勾选了path选项可忽略，若无请百度）
 3. 搜索 cmd ，弹出黑窗后输入 `python`，若弹出版本信息则整明配置成功
-4. 继续输入 `pip install selenium` ，等待安装完成，关闭黑窗
+4. 打开新的cmd 输入 `pip install selenium` ，等待安装完成，关闭黑窗
 
 配置用户：
 
