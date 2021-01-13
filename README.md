@@ -48,6 +48,43 @@ password
 
 然后就可以每天定时自动上报了
 
+
+
+> 多人版本使用方法...
+
+配置python环境：
+
+1. 安装  https://www.python.org/downloads/
+2. 添加 python 到环境变量中（如果第一步勾选了path选项可忽略，若无请百度）
+3. 搜索 cmd ，弹出黑窗后输入 `python`，若弹出版本信息则整明配置成功
+4. 继续输入 `pip install selenium` ，等待安装完成，关闭黑窗
+
+配置用户：
+
+1. 解压后的文件夹路径为 E:\某个文件夹\Autoform4COVID19
+2. 在里面新建文件夹并命名为 users
+3. 在user里面添加以用户名为名称的txt文件，第一行输入密码(若密码错误则该用户在运行后会被移动到‘错误用户’文件夹内)
+
+定时任务设置
+
+1. 任意地方新建txt文件，并在里面输入相关信息
+
+    其中，E: 以及 cd E:\某个文件夹\Autoform4COVID19 是你解压下载文件的盘和具体位置
+
+    ```shell
+    @echo off  
+    E:  
+    cd E:\pythondemo\Autoform4COVID19
+    start python main.py
+    exit
+    ```
+
+2. 重命名后缀.txt 为 .bat
+
+3. 按上面图文配置定时任务 最后选择.bat文件而不是exe文件
+
+
+
 ***
 
 > 如果本项目对你有帮助，请我喝杯奶茶
