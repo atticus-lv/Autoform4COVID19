@@ -4,7 +4,7 @@
 
 1. 点击本页面的 Code，下载ZIP 
 
-2. 解压并打开 **`main.exe`** 文件（请勿删除`chromedriver.exe`文件）
+2. 解压并打开 **`自动填报.exe`** 文件（请勿删除`chromedriver.exe`文件）
 
 > **连接学校WIFI时无法进入网站，会导致程序报错**
 
@@ -40,7 +40,7 @@ password
 
 ![image-20200908120648812](img/image-20200908120648812.png)
 
-选择 **main.exe**
+选择 **自动填报.exe**
 
 ![image-20200908121229475](img/image-20200908121229475.png)
 
