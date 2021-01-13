@@ -177,7 +177,6 @@ class 每日报平安(Autoform):
     def fill(self):
         logger.info(f"{self.username}自动填写开始,移动鼠标可能导致填写失败...")
         try:
-            self.driver.implicitly_wait(2)
             tem = self.driver.find_element_by_xpath("//input[@name='TW']")
             tem.send_keys(TW)
             logger.info(f"{self.username}体温填写完毕...")
